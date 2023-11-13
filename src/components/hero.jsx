@@ -173,7 +173,7 @@ const Hero = () => {
         <div className='pb-4'>
             <p className='text-gray-500 text-2xl pb-2 font-merriweather font-thin shadow-md px-2'>AI summarized text</p>
             <div className='px-2'>
-              <div className='bg-white w-full lg:w-[30vw] h-[50vh] rounded-lg text-lg font-poppins'>
+              <div className='bg-white w-full lg:w-[30vw] lg:h-[50vh] h-[80vh] rounded-lg text-lg font-poppins'>
             {isLoading ? (
               <div className='spinner-container'>
                 <div className='spinner'>        
