@@ -39,6 +39,12 @@ const Hero = () => {
     setWordCount(count);
   };
   const handleSummarize = () => {
+    const noOfWords = text.split(' ');
+    if (noOfWords.length < 50) {
+      alert('Please enter at least 50 words');
+      return;
+    }
+
     setIsLoading(true)
     const options = {
       method: 'POST',
@@ -97,7 +103,7 @@ const Hero = () => {
         <div>
           <img src={aIimage} alt="AI Image" className='' />
         </div>
-        <div className='max-w-2xl'><p className='text-lg lg:text-xl text-gray-500 font-light font-poppins '> <p className='text-cyan-800'> What does SumText do? </p><br/>SumText simplifies any text by condensing it into clear and easy-to-read content. Say goodbye to lengthy texts and information overload, as SumText empowers you to access key insights and knowledge concisely and efficiently.</p>
+        <div className='max-w-2xl'><p className='text-lg lg:text-xl text-gray-500 font-light font-poppins '> <span className='text-cyan-800'> What does SumText do? </span><br/>SumText simplifies any text by condensing it into clear and easy-to-read content. Say goodbye to lengthy texts and information overload, as SumText empowers you to access key insights and knowledge concisely and efficiently.</p>
           
         </div>
       </div>
@@ -137,27 +143,37 @@ const Hero = () => {
             <option value="long">Long</option>
             <option value="short">Short</option>
           </select>
-          <button className="group relative overflow-hidden transition-transform transform hover:scale-105 border border-cyan-600 hover:bg-cyan-800  py-2 px-20 rounded-lg mt-5 text-cyan-600 text-lg hover:text-gray-200" onClick={handleSummarize}>
+          <button className="group relative overflow-hidden transition-transform transform hover:scale-105 border border-cyan-600 hover:bg-cyan-800  py-2 px-20 rounded-lg mt-5 text-cyan-600 text-lg hover:text-gray-200 hidden lg:block" onClick={handleSummarize}>
             <span className="absolute inset-0 w-full h-full bg-cyan-800 opacity-5  transform scale-x-0 origin-left transition-transform group-hover:scale-x-100 "></span>
             Summarize
           </button>
         </div>
         <div className='pt-8 lg:pt-0'>
           <div className='flex justify-between items-center m-auto'>
-            <p className='text-gray-500 text-2xl pb-2 flex font-merriweather'>Original Text </p>
+            <p className='text-gray-500 text-2xl pb-2 flex font-merriweather px-2'>Original Text </p>
             <p className='text-gray-500 text-xl pb-2 flex mr-5 font-merriweather'>{wordCount}/255,000</p>
 
-          </div>
-          <textarea
+            </div>
+            <div className='px-2'>
+              <textarea
             onChange={handleTextAreaChange}
-          className=" w-[100vw] lg:w-[30vw] h-[50vh] p-4 rounded-lg transition focus:outline-none focus:border-cyan-500 focus:h-120 text-lg font-poppins"
+          className=" w-full lg:w-[30vw] h-[50vh] p-4 rounded-lg transition focus:outline-none focus:border-cyan-500 focus:h-120 text-lg font-poppins"
           placeholder="Paste your text here to summarize..."
-        />
+              />
+            </div>
+            <div className='px-2'>
+              <button className="group relative overflow-hidden transition-transform transform hover:scale-105  bg-cyan-800 hover:bg-cyan-800 
+            py-2 px-28 rounded-lg mt-5 text-white text-lg hover:text-gray-200 flex justify-items-center m-auto lg:hidden " onClick={handleSummarize}>
+            <span className="absolute inset-0 w-full h-full bg-cyan-800 opacity-5  transform scale-x-0 origin-left transition-transform group-hover:scale-x-100 "></span>
+            Summarize
+              </button>
+            </div>
+
         </div>
         <div className='pb-4'>
-            <p className='text-gray-500 text-2xl pb-2 font-merriweather font-thin shadow-md'>AI summarized text</p>
-            <button className='bg-white text-black' onClick={handleCopy}> {copied === typedSummary ? 'copy':'copied' }</button>
-          <div className='bg-white w-[100vw] lg:w-[30vw] h-[50vh] rounded-lg text-lg font-poppins'>
+            <p className='text-gray-500 text-2xl pb-2 font-merriweather font-thin shadow-md px-2'>AI summarized text</p>
+            <div className='px-2'>
+              <div className='bg-white w-full lg:w-[30vw] h-[50vh] rounded-lg text-lg font-poppins'>
             {isLoading ? (
               <div className='spinner-container'>
                 <div className='spinner'>        
@@ -170,6 +186,8 @@ const Hero = () => {
               </div>)
             )}
           </div>
+
+            </div>
         </div>
         </div>
         </div>
