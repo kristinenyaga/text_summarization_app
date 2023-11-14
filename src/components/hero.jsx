@@ -21,15 +21,6 @@ const Hero = () => {
   const [text, setText] = useState('');
   const [typedSummary, setTypedSummary] = useState('');
   const [wordIndex, setWordIndex] = useState(0);
-  const [copied, setCopied] = useState("")
-  
-    const handleCopy = () => {
-    setCopied(typedSummary)
-    navigator.clipboard.writeText(typedSummary)
-    setTimeout(()=>setCopied(false),3000)
-    
-  }
-
 
   const handleTextAreaChange = (e) => {
     setText(e.target.value);
@@ -58,7 +49,7 @@ const Hero = () => {
         length: length ? length : 'auto',
         format: selectedOption? selectedOption : 'paragraph',
         model: 'command',
-        extractiveness: extractiveness ? extractiveness : 'auto',
+        extractiveness: extractiveness ? extractiveness : 'high',
         temperature: 0,
         text: text,
       },
@@ -84,7 +75,7 @@ const Hero = () => {
           } else {
             clearInterval(interval);
           }
-        }, 200); // Adjust the delay as needed
+        }, 100); 
       })
       .catch(function (error) {
         console.error(error);
@@ -92,7 +83,7 @@ const Hero = () => {
     
   }
     useEffect(() => {
-    setTypedSummary(''); // Reset typedSummary when text changes
+    setTypedSummary('');
   }, [text]);
 
   return (
@@ -103,7 +94,7 @@ const Hero = () => {
         <div>
           <img src={aIimage} alt="AI Image" className='' />
         </div>
-        <div className='max-w-2xl'><p className='text-lg lg:text-xl text-gray-500 font-light font-poppins '> <span className='text-cyan-800'> What does SumText do? </span><br/>SumText simplifies any text by condensing it into clear and easy-to-read content. Say goodbye to lengthy texts and information overload, as SumText empowers you to access key insights and knowledge concisely and efficiently.</p>
+        <div className='max-w-2xl'><p className='text-lg text-gray-400 font-light font-poppins '> <span className='text-cyan-800 text-2xl '> What does SumText do? </span><br/>SumText simplifies any text by condensing it into clear and easy-to-read content. Say goodbye to lengthy texts and information overload, as SumText empowers you to access key insights and knowledge concisely and efficiently.</p>
           
         </div>
       </div>
@@ -133,7 +124,7 @@ const Hero = () => {
             <option value="low">Low</option>
           </select>
           <p className="text-gray-300 mt-5 font-merriweather">
-            Length of summary:
+            Length of summarized text:
           </p>
           <select
             className="block w-full px-12 py-2 mt-2 leading-5 rounded-lg focus:outline-none focus:ring focus:border-blue-300 text-sm border-none text-gray-200 font-poppins bg-cyan-800 "
@@ -143,7 +134,7 @@ const Hero = () => {
             <option value="long">Long</option>
             <option value="short">Short</option>
           </select>
-          <button className="group relative overflow-hidden transition-transform transform hover:scale-105 border border-cyan-600 hover:bg-cyan-800  py-2 px-20 rounded-lg mt-5 text-cyan-600 text-lg hover:text-gray-200 hidden lg:block" onClick={handleSummarize}>
+          <button className="group relative overflow-hidden transition-transform transform hover:scale-105 border border-cyan-600 hover:bg-cyan-800  py-2 px-36 rounded-lg mt-5 text-cyan-600 text-lg hover:text-gray-200 hidden lg:block" onClick={handleSummarize}>
             <span className="absolute inset-0 w-full h-full bg-cyan-800 opacity-5  transform scale-x-0 origin-left transition-transform group-hover:scale-x-100 "></span>
             Summarize
           </button>
