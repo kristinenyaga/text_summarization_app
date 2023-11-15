@@ -46,11 +46,11 @@ const Hero = () => {
         authorization: 'Bearer tm0SkyqezvL7Wf8aUIo0cLAtBGywGWOBNonFh3Bd',
       },
       data: {
-        length: length ? length : 'auto',
+        length: length ? length : 'long',
         format: selectedOption? selectedOption : 'paragraph',
         model: 'command',
         extractiveness: extractiveness ? extractiveness : 'high',
-        temperature: 0,
+        temperature: 0.3,
         text: text,
       },
     };
@@ -164,7 +164,7 @@ const Hero = () => {
         <div className='pb-4'>
             <p className='text-gray-500 text-2xl pb-2 font-merriweather font-thin shadow-md px-2'>AI summarized text</p>
             <div className='px-2'>
-              <div className='bg-white w-full lg:w-[30vw] lg:h-[50vh] h-[80vh] rounded-lg text-lg font-poppins'>
+              <div className='bg-white w-full lg:w-[30vw] lg:h-[50vh] h-[80vh] rounded-lg text-lg font-poppins' style={{ overflowY: 'auto' }}>
             {isLoading ? (
               <div className='spinner-container'>
                 <div className='spinner'>        
@@ -172,13 +172,13 @@ const Hero = () => {
               </div>
 
         ) :(typedSummary && (
-              <div className='p-4'>
+              <div className='p-4' style={{ overflowY: 'auto' }}>
                 <p>{typedSummary}</p>
               </div>)
             )}
           </div>
-
             </div>
+
         </div>
         </div>
         </div>
